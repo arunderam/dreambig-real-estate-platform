@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192" width="192" height="192">
+  <defs>
+    <linearGradient id="grad192" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background circle -->
+  <circle cx="96" cy="96" r="90" fill="url(#grad192)" stroke="#fff" stroke-width="6"/>
+  
+  <!-- House icon scaled for 192x192 -->
+  <path d="M48 120h96v48H48z" fill="#fff" opacity="0.9"/>
+  <path d="M36 108l60-48 60 48v12H36z" fill="#fff"/>
+  <rect x="72" y="132" width="18" height="24" fill="url(#grad192)"/>
+  <rect x="102" y="132" width="18" height="18" fill="url(#grad192)"/>
+  
+  <!-- Roof detail -->
+  <path d="M96 60l48 38.4V108l-48-38.4L48 108V98.4z" fill="#fff" opacity="0.8"/>
+  
+  <!-- Additional details for larger size -->
+  <circle cx="81" cy="144" r="2" fill="#fff"/>
+  <rect x="108" y="138" width="6" height="6" fill="#fff" opacity="0.7"/>
+</svg>

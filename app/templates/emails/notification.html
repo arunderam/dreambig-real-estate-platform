@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }} - DreamBig</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #e74c3c;
+        }
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: #e74c3c;
+            margin-bottom: 10px;
+        }
+        .notification-title {
+            color: #2c3e50;
+            font-size: 24px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .notification-message {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #e74c3c;
+            margin: 20px 0;
+        }
+        .notification-details {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 5px;
+            border: 1px solid #dee2e6;
+            margin: 15px 0;
+        }
+        .action-button {
+            display: inline-block;
+            background-color: #e74c3c;
+            color: white;
+            padding: 12px 30px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            margin: 20px 0;
+            text-align: center;
+        }
+        .action-button:hover {
+            background-color: #c0392b;
+        }
+        .footer {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+            text-align: center;
+            color: #666;
+            font-size: 14px;
+        }
+        .social-links {
+            margin: 20px 0;
+        }
+        .social-links a {
+            display: inline-block;
+            margin: 0 10px;
+            color: #e74c3c;
+            text-decoration: none;
+        }
+        .unsubscribe {
+            margin-top: 20px;
+            font-size: 12px;
+            color: #999;
+        }
+        .highlight {
+            color: #e74c3c;
+            font-weight: bold;
+        }
+        .info-box {
+            background-color: #e8f4fd;
+            border: 1px solid #bee5eb;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        .warning-box {
+            background-color: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">🏠 DreamBig</div>
+            <p>Your Real Estate Partner</p>
+        </div>
+
+        <h1 class="notification-title">{{ title }}</h1>
+
+        <div class="notification-message">
+            <p>Hi {{ name }},</p>
+            <p>{{ message }}</p>
+        </div>
+
+        {% if data %}
+        <div class="notification-details">
+            <h3>Details:</h3>
+            {% if data.property_title %}
+            <p><strong>Property:</strong> {{ data.property_title }}</p>
+            {% endif %}
+            {% if data.inquirer_name %}
+            <p><strong>From:</strong> {{ data.inquirer_name }}</p>
+            {% endif %}
+            {% if data.sender_name %}
+            <p><strong>Sender:</strong> {{ data.sender_name }}</p>
+            {% endif %}
+            {% if data.service_type %}
+            <p><strong>Service:</strong> {{ data.service_type }}</p>
+            {% endif %}
+            {% if data.amount %}
+            <p><strong>Amount:</strong> ₹{{ data.amount }}</p>
+            {% endif %}
+            {% if data.description %}
+            <p><strong>Description:</strong> {{ data.description }}</p>
+            {% endif %}
+        </div>
+        {% endif %}
+
+        <div style="text-align: center;">
+            <a href="{{ dashboard_url }}" class="action-button">
+                View in Dashboard
+            </a>
+        </div>
+
+        {% if data.reference_id and data.property_title %}
+        <div class="info-box">
+            <p><strong>Quick Actions:</strong></p>
+            <ul>
+                <li><a href="{{ dashboard_url }}/properties/{{ data.reference_id }}">View Property Details</a></li>
+                <li><a href="{{ dashboard_url }}/chat">Open Chat</a></li>
+                <li><a href="{{ dashboard_url }}/notifications">View All Notifications</a></li>
+            </ul>
+        </div>
+        {% endif %}
+
+        <div class="warning-box">
+            <p><strong>Security Note:</strong> This notification was sent to you because you have an account with DreamBig. If you didn't expect this notification, please contact our support team immediately.</p>
+        </div>
+
+        <div class="footer">
+            <div class="social-links">
+                <a href="#">Facebook</a>
+                <a href="#">Twitter</a>
+                <a href="#">LinkedIn</a>
+                <a href="#">Instagram</a>
+            </div>
+            
+            <p>
+                <strong>DreamBig Real Estate Platform</strong><br>
+                Making property dreams come true, one listing at a time.
+            </p>
+            
+            <p>
+                Need help? Contact us at <a href="mailto:{{ support_email }}">{{ support_email }}</a><br>
+                Visit our website: <a href="http://localhost:8000">DreamBig</a>
+            </p>
+            
+            <div class="unsubscribe">
+                <p>
+                    You received this email because you have an account with DreamBig.<br>
+                    <a href="{{ dashboard_url }}/settings/notifications">Manage notification preferences</a> |
+                    <a href="{{ dashboard_url }}/settings">Account Settings</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

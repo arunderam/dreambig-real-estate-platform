@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="DreamBig Real Estate - Find your perfect property with our comprehensive real estate platform. Browse properties, investments, and professional services.">
+    <meta name="keywords" content="real estate, properties, investments, buy, sell, rent, DreamBig">
+    <meta name="author" content="DreamBig Real Estate">
+    <meta name="theme-color" content="#667eea">
+
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="/static/manifest.json">
+
+    <!-- Icons for PWA -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/static/images/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/static/images/icons/favicon-16x16.png">
+    <link rel="apple-touch-icon" href="/static/images/icons/apple-touch-icon.png">
+
+    <!-- iOS PWA Support -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="DreamBig">
+
+    <title>DreamBig Real Estate - Find Your Perfect Property</title>
+
+    <!-- External CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Internal CSS -->
+    <link href="/static/css/dark-mode.css" rel="stylesheet">
+    <link href="/static/css/accessibility.css" rel="stylesheet">
+    <link href="/static/css/mobile-responsive.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.9), rgba(118, 75, 162, 0.9)), 
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 600"><rect fill="%23f0f2f5" width="1000" height="600"/><circle fill="%23667eea" cx="200" cy="150" r="100" opacity="0.1"/><circle fill="%23764ba2" cx="800" cy="400" r="150" opacity="0.1"/></svg>');
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            padding: 0 20px;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 40px;
+            opacity: 0.9;
+            animation: fadeInUp 1s ease-out 0.2s both;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 1s ease-out 0.4s both;
+        }
+
+        .btn {
+            padding: 15px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-primary {
+            background: white;
+            color: #667eea;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-secondary:hover {
+            background: white;
+            color: #667eea;
+            transform: translateY(-3px);
+        }
+
+        /* Features Section */
+        .features {
+            padding: 100px 0;
+            background: #f8f9fa;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .section-header p {
+            font-size: 1.2rem;
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+            color: white;
+            font-size: 2rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .feature-card p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* CTA Section */
+        .featured-properties {
+            padding: 80px 0;
+            background-color: #f8f9fa;
+        }
+
+        .properties-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .property-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        .property-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .property-image {
+            height: 250px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .property-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: #667eea;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .property-content {
+            padding: 25px;
+        }
+
+        .property-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 10px;
+            line-height: 1.3;
+        }
+
+        .property-location {
+            color: #666;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .property-details {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .property-specs {
+            display: flex;
+            gap: 15px;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .property-price {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #667eea;
+        }
+
+        .loading-message {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+            font-size: 1.1rem;
+        }
+
+        .cta {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .cta h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .cta p {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn {
+                width: 100%;
+                max-width: 300px;
+                justify-content: center;
+            }
+
+            .section-header h2 {
+                font-size: 2rem;
+            }
+
+            .features {
+                padding: 60px 0;
+            }
+
+            .cta {
+                padding: 60px 0;
+            }
+
+            .cta h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Include Navbar -->
+    {% include 'components/navbar.html' %}
+
+    <!-- Hero Section -->
+    <section class="hero" role="banner" aria-labelledby="hero-title">
+        <div class="hero-content">
+            <h1 id="hero-title">Find Your Dream Property</h1>
+            <p>Discover the perfect home, investment opportunity, or commercial space with DreamBig Real Estate Platform</p>
+            <div class="hero-buttons">
+                <a href="/properties" class="btn btn-primary">
+                    <i class="fas fa-search"></i>
+                    Browse Properties
+                </a>
+                <a href="/register" class="btn btn-secondary">
+                    <i class="fas fa-user-plus"></i>
+                    Get Started
+                </a>
+            </div>
+        </div>
+    </section>
+
+
+
+        <!-- Featured Properties Section -->
+        <section class="featured-properties" aria-labelledby="featured-title">
+            <div class="container">
+                <div class="section-header">
+                    <h2 id="featured-title">Featured Properties</h2>
+                    <p>Discover our handpicked selection of premium properties</p>
+            </div>
+            <div id="featured-properties-grid" class="properties-grid">
+                <div class="loading-message">Loading featured properties...</div>
+            </div>
+            <div class="text-center" style="margin-top: 40px;">
+                <a href="/properties" class="btn btn-primary">
+                    <i class="fas fa-eye"></i>
+                    View All Properties
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main id="main-content" tabindex="-1">
+        <!-- Features Section -->
+        <section class="features" aria-labelledby="features-title">
+            <div class="container">
+                <div class="section-header">
+                    <h2 id="features-title">Why Choose DreamBig?</h2>
+                    <p>We provide comprehensive real estate solutions with cutting-edge technology and personalized service</p>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <h3>Extensive Property Listings</h3>
+                    <p>Browse thousands of verified properties including residential, commercial, and investment opportunities across prime locations.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Smart Investment Tools</h3>
+                    <p>Make informed decisions with our AI-powered analytics, market insights, and investment calculators.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Secure Transactions</h3>
+                    <p>Experience safe and transparent transactions with our verified listings and secure payment systems.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Expert Support</h3>
+                    <p>Get professional assistance from our team of real estate experts, legal advisors, and property managers.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3>Mobile Experience</h3>
+                    <p>Access our platform anywhere with our responsive design and mobile-optimized interface.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <h3>Trusted Network</h3>
+                    <p>Connect with verified agents, property owners, and service providers in our trusted network.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <h2>Ready to Find Your Dream Property?</h2>
+            <p>Join thousands of satisfied customers who found their perfect property with DreamBig</p>
+            <div class="hero-buttons">
+                <a href="/register" class="btn btn-primary">
+                    <i class="fas fa-rocket"></i>
+                    Start Your Journey
+                </a>
+                <a href="/about" class="btn btn-secondary">
+                    <i class="fas fa-info-circle"></i>
+                    Learn More
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    
+    <!-- Custom JavaScript -->
+    <script src="{{ url_for('static', path='/js/firebase-config.js') }}"></script>
+    <script src="{{ url_for('static', path='/js/auth.js') }}"></script>
+
+    <script>
+        // Load featured properties on home page
+        async function loadFeaturedProperties() {
+            const grid = document.getElementById('featured-properties-grid');
+
+            try {
+                const response = await fetch('/api/v1/search/?limit=3');
+
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}`);
+                }
+
+                const data = await response.json();
+                const properties = data.properties || [];
+
+                if (properties.length === 0) {
+                    grid.innerHTML = '<div class="loading-message">No properties available at the moment.</div>';
+                    return;
+                }
+
+                grid.innerHTML = properties.map(property => `
+                    <div class="property-card" onclick="window.location.href='/properties'">
+                        <div class="property-image" style="background-image: url('https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=600&h=400&fit=crop')">
+                            <div class="property-badge">${property.property_type}</div>
+                        </div>
+                        <div class="property-content">
+                            <div class="property-title">${property.title}</div>
+                            <div class="property-location">
+                                <i class="fas fa-map-marker-alt"></i>
+                                ${property.city}, ${property.state}
+                            </div>
+                            <div class="property-details">
+                                <div class="property-specs">
+                                    <span><i class="fas fa-bed"></i> ${property.bhk} BHK</span>
+                                    <span><i class="fas fa-expand-arrows-alt"></i> ${property.area} sq ft</span>
+                                </div>
+                                <div class="property-price">₹${property.price.toLocaleString()}</div>
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+
+            } catch (error) {
+                console.error('Error loading featured properties:', error);
+                grid.innerHTML = '<div class="loading-message">Unable to load properties. Please try again later.</div>';
+            }
+        }
+
+        // Load featured properties when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            if (document.getElementById('featured-properties-grid')) {
+                loadFeaturedProperties();
+            }
+        });
+    </script>
+
+    </main>
+
+    <!-- PWA and Accessibility Scripts -->
+    <script src="/static/js/pwa.js"></script>
+    <script src="/static/js/theme-manager.js"></script>
+    <script src="/static/js/accessibility.js"></script>
+
+    <!-- Service Worker Registration -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/static/sw.js')
+                    .then(registration => {
+                        console.log('SW registered: ', registration);
+                    })
+                    .catch(registrationError => {
+                        console.log('SW registration failed: ', registrationError);
+                    });
+            });
+        }
+    </script>
+</body>
+</html>

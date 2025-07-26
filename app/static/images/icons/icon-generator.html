@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DreamBig PWA Icon Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .icon-preview {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        .icon-item {
+            text-align: center;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+        .icon-canvas {
+            border: 1px solid #ccc;
+            margin: 10px 0;
+        }
+        button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover {
+            opacity: 0.9;
+        }
+        .instructions {
+            background: #e3f2fd;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>DreamBig PWA Icon Generator</h1>
+        <p>This tool generates PWA icons for the DreamBig Real Estate Platform.</p>
+        
+        <div class="instructions">
+            <h3>Instructions:</h3>
+            <ol>
+                <li>Click "Generate All Icons" to create all required PWA icon sizes</li>
+                <li>Right-click each icon and "Save image as..." to download</li>
+                <li>Save them in the <code>app/static/images/icons/</code> directory with the correct names</li>
+                <li>The icons will be automatically used by the PWA manifest</li>
+            </ol>
+        </div>
+        
+        <button onclick="generateAllIcons()">Generate All Icons</button>
+        <button onclick="downloadAllIcons()">Download All Icons (ZIP)</button>
+        
+        <div class="icon-preview" id="iconPreview">
+            <!-- Icons will be generated here -->
+        </div>
+    </div>
+
+    <script>
+        const iconSizes = [
+            { size: 72, name: 'icon-72x72.png' },
+            { size: 96, name: 'icon-96x96.png' },
+            { size: 128, name: 'icon-128x128.png' },
+            { size: 144, name: 'icon-144x144.png' },
+            { size: 152, name: 'icon-152x152.png' },
+            { size: 192, name: 'icon-192x192.png' },
+            { size: 384, name: 'icon-384x384.png' },
+            { size: 512, name: 'icon-512x512.png' },
+            { size: 32, name: 'favicon-32x32.png' },
+            { size: 16, name: 'favicon-16x16.png' },
+            { size: 180, name: 'apple-touch-icon.png' }
+        ];
+
+        function drawIcon(canvas, size) {
+            const ctx = canvas.getContext('2d');
+            canvas.width = size;
+            canvas.height = size;
+            
+            // Clear canvas
+            ctx.clearRect(0, 0, size, size);
+            
+            // Create gradient background
+            const gradient = ctx.createLinearGradient(0, 0, size, size);
+            gradient.addColorStop(0, '#667eea');
+            gradient.addColorStop(1, '#764ba2');
+            
+            // Draw background circle
+            ctx.fillStyle = gradient;
+            ctx.beginPath();
+            ctx.arc(size/2, size/2, size/2 - 2, 0, 2 * Math.PI);
+            ctx.fill();
+            
+            // Draw white border
+            ctx.strokeStyle = '#ffffff';
+            ctx.lineWidth = 2;
+            ctx.stroke();
+            
+            // Draw house icon
+            const scale = size / 32; // Base size is 32px
+            
+            ctx.fillStyle = '#ffffff';
+            
+            // House base
+            ctx.fillRect(8*scale, 20*scale, 16*scale, 8*scale);
+            
+            // Roof
+            ctx.beginPath();
+            ctx.moveTo(6*scale, 18*scale);
+            ctx.lineTo(16*scale, 10*scale);
+            ctx.lineTo(26*scale, 18*scale);
+            ctx.lineTo(26*scale, 20*scale);
+            ctx.lineTo(6*scale, 20*scale);
+            ctx.closePath();
+            ctx.fill();
+            
+            // Door
+            ctx.fillStyle = gradient;
+            ctx.fillRect(12*scale, 22*scale, 3*scale, 4*scale);
+            
+            // Window
+            ctx.fillRect(17*scale, 22*scale, 3*scale, 3*scale);
+            
+            // Roof highlight
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
+            ctx.beginPath();
+            ctx.moveTo(16*scale, 10*scale);
+            ctx.lineTo(24*scale, 16.4*scale);
+            ctx.lineTo(24*scale, 18*scale);
+            ctx.lineTo(16*scale, 11.6*scale);
+            ctx.lineTo(8*scale, 18*scale);
+            ctx.lineTo(8*scale, 16.4*scale);
+            ctx.closePath();
+            ctx.fill();
+        }
+
+        function generateAllIcons() {
+            const preview = document.getElementById('iconPreview');
+            preview.innerHTML = '';
+            
+            iconSizes.forEach(iconInfo => {
+                const iconItem = document.createElement('div');
+                iconItem.className = 'icon-item';
+                
+                const title = document.createElement('h4');
+                title.textContent = `${iconInfo.size}x${iconInfo.size}`;
+                
+                const canvas = document.createElement('canvas');
+                canvas.className = 'icon-canvas';
+                canvas.style.width = Math.min(iconInfo.size, 128) + 'px';
+                canvas.style.height = Math.min(iconInfo.size, 128) + 'px';
+                
+                const filename = document.createElement('p');
+                filename.textContent = iconInfo.name;
+                filename.style.fontSize = '12px';
+                filename.style.color = '#666';
+                
+                const downloadBtn = document.createElement('button');
+                downloadBtn.textContent = 'Download';
+                downloadBtn.onclick = () => downloadIcon(canvas, iconInfo.name);
+                
+                drawIcon(canvas, iconInfo.size);
+                
+                iconItem.appendChild(title);
+                iconItem.appendChild(canvas);
+                iconItem.appendChild(filename);
+                iconItem.appendChild(downloadBtn);
+                
+                preview.appendChild(iconItem);
+            });
+        }
+
+        function downloadIcon(canvas, filename) {
+            const link = document.createElement('a');
+            link.download = filename;
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+        }
+
+        function downloadAllIcons() {
+            // This would require a zip library, for now just generate all icons
+            generateAllIcons();
+            alert('Please download each icon individually by clicking the Download button under each icon.');
+        }
+
+        // Generate icons on page load
+        window.addEventListener('load', generateAllIcons);
+    </script>
+</body>
+</html>

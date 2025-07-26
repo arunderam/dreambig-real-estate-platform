@@ -1,0 +1,358 @@
+/* Dark Mode Styles for DreamBig Real Estate Platform */
+
+/* CSS Custom Properties for Theme Colors */
+:root {
+  /* Light theme colors */
+  --bg-primary: #ffffff;
+  --bg-secondary: #f8f9fa;
+  --bg-tertiary: #e9ecef;
+  --text-primary: #333333;
+  --text-secondary: #666666;
+  --text-muted: #999999;
+  --border-color: #dee2e6;
+  --shadow-light: rgba(0, 0, 0, 0.1);
+  --shadow-medium: rgba(0, 0, 0, 0.15);
+  --shadow-heavy: rgba(0, 0, 0, 0.2);
+  
+  /* Brand colors (consistent across themes) */
+  --brand-primary: #667eea;
+  --brand-secondary: #764ba2;
+  --brand-accent: #e74c3c;
+  --success-color: #28a745;
+  --warning-color: #ffc107;
+  --danger-color: #dc3545;
+  --info-color: #17a2b8;
+  
+  /* Interactive elements */
+  --hover-bg: #f8f9fa;
+  --active-bg: #e9ecef;
+  --input-bg: #ffffff;
+  --input-border: #ced4da;
+  --input-focus: #667eea;
+  
+  /* Navigation */
+  --nav-bg: #ffffff;
+  --nav-text: #333333;
+  --nav-hover: #f8f9fa;
+  
+  /* Cards and containers */
+  --card-bg: #ffffff;
+  --card-border: #dee2e6;
+  --card-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Dark theme colors */
+[data-theme="dark"] {
+  --bg-primary: #1a1a1a;
+  --bg-secondary: #2d2d2d;
+  --bg-tertiary: #404040;
+  --text-primary: #ffffff;
+  --text-secondary: #cccccc;
+  --text-muted: #999999;
+  --border-color: #404040;
+  --shadow-light: rgba(0, 0, 0, 0.3);
+  --shadow-medium: rgba(0, 0, 0, 0.4);
+  --shadow-heavy: rgba(0, 0, 0, 0.5);
+  
+  /* Interactive elements */
+  --hover-bg: #2d2d2d;
+  --active-bg: #404040;
+  --input-bg: #2d2d2d;
+  --input-border: #404040;
+  --input-focus: #667eea;
+  
+  /* Navigation */
+  --nav-bg: #1a1a1a;
+  --nav-text: #ffffff;
+  --nav-hover: #2d2d2d;
+  
+  /* Cards and containers */
+  --card-bg: #2d2d2d;
+  --card-border: #404040;
+  --card-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Base styles using CSS custom properties */
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Navigation styles */
+.navbar {
+  background-color: var(--nav-bg);
+  border-bottom: 1px solid var(--border-color);
+  transition: background-color 0.3s ease;
+}
+
+.nav-link {
+  color: var(--nav-text) !important;
+  transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+.nav-link:hover {
+  background-color: var(--nav-hover);
+  color: var(--text-primary) !important;
+}
+
+/* Card styles */
+.card, .auth-card, .property-card, .investment-card, .service-card {
+  background-color: var(--card-bg);
+  border: 1px solid var(--card-border);
+  box-shadow: var(--card-shadow);
+  transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Form elements */
+input, textarea, select {
+  background-color: var(--input-bg);
+  border: 1px solid var(--input-border);
+  color: var(--text-primary);
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+}
+
+input:focus, textarea:focus, select:focus {
+  border-color: var(--input-focus);
+  background-color: var(--input-bg);
+  color: var(--text-primary);
+}
+
+input::placeholder, textarea::placeholder {
+  color: var(--text-muted);
+}
+
+/* Button styles */
+.btn-secondary {
+  background-color: var(--bg-secondary);
+  border-color: var(--border-color);
+  color: var(--text-primary);
+}
+
+.btn-secondary:hover {
+  background-color: var(--hover-bg);
+  border-color: var(--border-color);
+  color: var(--text-primary);
+}
+
+/* Dashboard specific styles */
+.dashboard-container {
+  background-color: var(--bg-primary);
+}
+
+.dashboard-card {
+  background-color: var(--card-bg);
+  border: 1px solid var(--card-border);
+}
+
+.stats-card {
+  background-color: var(--card-bg);
+  border: 1px solid var(--card-border);
+}
+
+/* Property listing styles */
+.property-grid {
+  background-color: var(--bg-primary);
+}
+
+.property-item {
+  background-color: var(--card-bg);
+  border: 1px solid var(--card-border);
+}
+
+.property-item:hover {
+  background-color: var(--hover-bg);
+}
+
+/* Search and filter styles */
+.search-container {
+  background-color: var(--card-bg);
+  border: 1px solid var(--card-border);
+}
+
+.filter-section {
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+}
+
+/* Modal styles */
+.modal-content {
+  background-color: var(--card-bg);
+  border: 1px solid var(--card-border);
+}
+
+.modal-header {
+  border-bottom: 1px solid var(--border-color);
+}
+
+.modal-footer {
+  border-top: 1px solid var(--border-color);
+}
+
+/* Table styles */
+table {
+  background-color: var(--card-bg);
+  color: var(--text-primary);
+}
+
+th {
+  background-color: var(--bg-secondary);
+  border-bottom: 1px solid var(--border-color);
+  color: var(--text-primary);
+}
+
+td {
+  border-bottom: 1px solid var(--border-color);
+  color: var(--text-secondary);
+}
+
+tr:hover {
+  background-color: var(--hover-bg);
+}
+
+/* Chat styles */
+.chat-container {
+  background-color: var(--bg-primary);
+}
+
+.chat-sidebar {
+  background-color: var(--card-bg);
+  border-right: 1px solid var(--border-color);
+}
+
+.chat-main {
+  background-color: var(--card-bg);
+}
+
+.message {
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+}
+
+.message.own {
+  background-color: var(--brand-primary);
+  color: white;
+}
+
+/* Notification styles */
+.notification {
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+}
+
+/* Footer styles */
+.footer {
+  background-color: var(--bg-secondary);
+  border-top: 1px solid var(--border-color);
+  color: var(--text-secondary);
+}
+
+/* Scrollbar styles for dark mode */
+[data-theme="dark"] ::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+[data-theme="dark"] ::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+}
+
+[data-theme="dark"] ::-webkit-scrollbar-thumb {
+  background: var(--bg-tertiary);
+  border-radius: 4px;
+}
+
+[data-theme="dark"] ::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* Theme toggle button */
+.theme-toggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: var(--card-shadow);
+  transition: all 0.3s ease;
+  z-index: 1000;
+  color: var(--text-primary);
+}
+
+.theme-toggle:hover {
+  background-color: var(--hover-bg);
+  transform: scale(1.1);
+}
+
+.theme-toggle i {
+  font-size: 20px;
+  transition: transform 0.3s ease;
+}
+
+.theme-toggle:hover i {
+  transform: rotate(180deg);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .theme-toggle {
+    top: 10px;
+    right: 10px;
+    width: 45px;
+    height: 45px;
+  }
+  
+  .theme-toggle i {
+    font-size: 18px;
+  }
+}
+
+/* Animation for theme transition */
+* {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  :root {
+    --border-color: #000000;
+    --text-primary: #000000;
+  }
+  
+  [data-theme="dark"] {
+    --border-color: #ffffff;
+    --text-primary: #ffffff;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+/* Print styles */
+@media print {
+  [data-theme="dark"] {
+    --bg-primary: #ffffff;
+    --bg-secondary: #f8f9fa;
+    --text-primary: #000000;
+    --text-secondary: #333333;
+    --card-bg: #ffffff;
+    --border-color: #dee2e6;
+  }
+  
+  .theme-toggle {
+    display: none;
+  }
+}

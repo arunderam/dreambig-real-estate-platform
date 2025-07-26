@@ -1,0 +1,460 @@
+/* Accessibility Improvements for DreamBig Real Estate Platform */
+
+/* Focus Management */
+*:focus {
+  outline: 2px solid var(--brand-primary, #667eea);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* Skip to main content link */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 6px;
+  background: var(--brand-primary, #667eea);
+  color: white;
+  padding: 8px 16px;
+  text-decoration: none;
+  border-radius: 4px;
+  z-index: 10000;
+  font-weight: 600;
+  transition: top 0.3s ease;
+}
+
+.skip-link:focus {
+  top: 6px;
+  outline: 2px solid white;
+}
+
+/* Screen reader only content */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.sr-only-focusable:focus {
+  position: static;
+  width: auto;
+  height: auto;
+  padding: inherit;
+  margin: inherit;
+  overflow: visible;
+  clip: auto;
+  white-space: normal;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .btn, .nav-link, .card {
+    border: 2px solid currentColor;
+  }
+  
+  .btn:hover, .nav-link:hover {
+    background-color: currentColor;
+    color: var(--bg-primary);
+  }
+  
+  input, textarea, select {
+    border: 2px solid currentColor;
+  }
+  
+  .property-card, .investment-card, .service-card {
+    border: 2px solid currentColor;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  
+  .hero {
+    animation: none;
+  }
+  
+  .fade-in, .slide-up, .bounce {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Keyboard navigation improvements */
+.nav-menu a:focus,
+.nav-user a:focus {
+  background-color: var(--hover-bg, #f8f9fa);
+  outline: 2px solid var(--brand-primary, #667eea);
+  outline-offset: -2px;
+}
+
+/* Button focus states */
+.btn:focus {
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.3);
+  outline: none;
+}
+
+.btn-primary:focus {
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.5);
+}
+
+.btn-secondary:focus {
+  box-shadow: 0 0 0 3px rgba(108, 117, 125, 0.3);
+}
+
+.btn-danger:focus {
+  box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.3);
+}
+
+/* Form accessibility */
+.form-group label {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+.form-control:focus {
+  border-color: var(--brand-primary, #667eea);
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
+  outline: none;
+}
+
+.form-control[aria-invalid="true"] {
+  border-color: var(--danger-color, #dc3545);
+  box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.2);
+}
+
+.form-error {
+  color: var(--danger-color, #dc3545);
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+  display: block;
+}
+
+.form-help {
+  color: var(--text-muted, #666);
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+  display: block;
+}
+
+/* Required field indicators */
+.required::after {
+  content: " *";
+  color: var(--danger-color, #dc3545);
+  font-weight: bold;
+}
+
+/* Card accessibility */
+.property-card:focus,
+.investment-card:focus,
+.service-card:focus {
+  outline: 2px solid var(--brand-primary, #667eea);
+  outline-offset: 2px;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Modal accessibility */
+.modal {
+  display: none;
+}
+
+.modal.show {
+  display: flex;
+}
+
+.modal-content:focus {
+  outline: none;
+}
+
+.modal-header .close:focus {
+  outline: 2px solid var(--brand-primary, #667eea);
+  outline-offset: 2px;
+}
+
+/* Table accessibility */
+table {
+  border-collapse: collapse;
+}
+
+th {
+  text-align: left;
+  font-weight: 600;
+}
+
+th[aria-sort] {
+  cursor: pointer;
+  position: relative;
+}
+
+th[aria-sort]:focus {
+  outline: 2px solid var(--brand-primary, #667eea);
+  outline-offset: -2px;
+}
+
+th[aria-sort="ascending"]::after {
+  content: " ↑";
+  position: absolute;
+  right: 8px;
+}
+
+th[aria-sort="descending"]::after {
+  content: " ↓";
+  position: absolute;
+  right: 8px;
+}
+
+/* Loading states */
+.loading {
+  position: relative;
+  pointer-events: none;
+}
+
+.loading::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  margin: -10px 0 0 -10px;
+  border: 2px solid var(--border-color, #dee2e6);
+  border-top-color: var(--brand-primary, #667eea);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .loading::after {
+    animation: none;
+    content: "Loading...";
+    border: none;
+    background: none;
+    color: var(--text-primary);
+    font-size: 14px;
+    width: auto;
+    height: auto;
+    margin: 0;
+    top: auto;
+    left: auto;
+    position: static;
+  }
+}
+
+/* Error states */
+.error-message {
+  background-color: #f8d7da;
+  border: 1px solid #f5c6cb;
+  color: #721c24;
+  padding: 12px 16px;
+  border-radius: 4px;
+  margin: 16px 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+[data-theme="dark"] .error-message {
+  background-color: #2d1b1e;
+  border-color: #5a2a2e;
+  color: #f8d7da;
+}
+
+.success-message {
+  background-color: #d4edda;
+  border: 1px solid #c3e6cb;
+  color: #155724;
+  padding: 12px 16px;
+  border-radius: 4px;
+  margin: 16px 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+[data-theme="dark"] .success-message {
+  background-color: #1e2d1b;
+  border-color: #2e5a2a;
+  color: #d4edda;
+}
+
+/* Tooltip accessibility */
+.tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 200px;
+  background-color: var(--bg-tertiary, #404040);
+  color: var(--text-primary);
+  text-align: center;
+  border-radius: 6px;
+  padding: 8px 12px;
+  position: absolute;
+  z-index: 1000;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -100px;
+  opacity: 0;
+  transition: opacity 0.3s;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.tooltip:hover .tooltiptext,
+.tooltip:focus .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* Breadcrumb accessibility */
+.breadcrumb {
+  padding: 12px 0;
+  margin-bottom: 20px;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.breadcrumb-item {
+  display: flex;
+  align-items: center;
+}
+
+.breadcrumb-item + .breadcrumb-item::before {
+  content: "/";
+  padding: 0 8px;
+  color: var(--text-muted, #666);
+}
+
+.breadcrumb-item.active {
+  color: var(--text-muted, #666);
+}
+
+.breadcrumb a:focus {
+  outline: 2px solid var(--brand-primary, #667eea);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* Print accessibility */
+@media print {
+  .skip-link,
+  .theme-toggle,
+  .pwa-install-button,
+  .nav-menu,
+  .sidebar {
+    display: none !important;
+  }
+  
+  .main-content {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  
+  a[href^="http"]:after {
+    content: " (" attr(href) ")";
+    font-size: 12px;
+    color: #666;
+  }
+  
+  .page-break {
+    page-break-before: always;
+  }
+}
+
+/* Mobile accessibility */
+@media (max-width: 768px) {
+  .btn {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  .nav-link {
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+  }
+  
+  input, textarea, select {
+    min-height: 44px;
+    font-size: 16px; /* Prevents zoom on iOS */
+  }
+  
+  .form-control {
+    padding: 12px 16px;
+  }
+}
+
+/* Focus trap for modals */
+.modal.show {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1050;
+}
+
+/* Announcement region for dynamic content */
+.announcement {
+  position: absolute;
+  left: -10000px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+/* Color contrast improvements */
+.text-muted {
+  color: var(--text-secondary, #666) !important;
+}
+
+.text-light {
+  color: var(--text-primary, #333) !important;
+}
+
+/* Link accessibility */
+a {
+  color: var(--brand-primary, #667eea);
+  text-decoration: underline;
+}
+
+a:hover,
+a:focus {
+  color: var(--brand-secondary, #764ba2);
+  text-decoration: none;
+}
+
+a:focus {
+  outline: 2px solid var(--brand-primary, #667eea);
+  outline-offset: 2px;
+  border-radius: 2px;
+}

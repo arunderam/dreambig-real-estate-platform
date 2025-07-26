@@ -1,0 +1,546 @@
+/* Mobile Responsive Enhancements for DreamBig Real Estate Platform */
+
+/* Base Mobile-First Approach */
+* {
+  box-sizing: border-box;
+}
+
+/* Touch-friendly sizing */
+.btn, .nav-link, input, textarea, select {
+  min-height: 44px;
+  min-width: 44px;
+}
+
+/* Mobile Navigation */
+@media (max-width: 768px) {
+  .navbar {
+    padding: 10px 15px;
+  }
+  
+  .nav-menu {
+    position: fixed;
+    top: 0;
+    left: -100%;
+    width: 280px;
+    height: 100vh;
+    background: var(--nav-bg, #ffffff);
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+    transition: left 0.3s ease;
+    z-index: 1000;
+    padding: 80px 20px 20px;
+    overflow-y: auto;
+  }
+  
+  .nav-menu.active {
+    left: 0;
+  }
+  
+  .nav-menu .nav-link {
+    display: block;
+    padding: 15px 20px;
+    border-bottom: 1px solid var(--border-color, #dee2e6);
+    color: var(--nav-text, #333);
+    text-decoration: none;
+    font-weight: 500;
+  }
+  
+  .nav-menu .nav-link:hover {
+    background-color: var(--nav-hover, #f8f9fa);
+  }
+  
+  .nav-toggle {
+    display: block;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: var(--nav-text, #333);
+    cursor: pointer;
+    padding: 10px;
+  }
+  
+  .nav-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+  }
+  
+  .nav-overlay.active {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+/* Mobile Hero Section */
+@media (max-width: 768px) {
+  .hero {
+    height: 100vh;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .hero h1 {
+    font-size: 2.5rem;
+    line-height: 1.2;
+    margin-bottom: 15px;
+  }
+  
+  .hero p {
+    font-size: 1.1rem;
+    margin-bottom: 30px;
+  }
+  
+  .hero-buttons {
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+  }
+  
+  .hero-buttons .btn {
+    width: 100%;
+    max-width: 280px;
+    padding: 15px 20px;
+    font-size: 1.1rem;
+  }
+}
+
+/* Mobile Grid Layouts */
+@media (max-width: 768px) {
+  .features-grid,
+  .properties-grid,
+  .services-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  .feature-card,
+  .property-card,
+  .service-card {
+    margin: 0 10px;
+  }
+}
+
+/* Mobile Forms */
+@media (max-width: 768px) {
+  .form-container {
+    padding: 20px 15px;
+    margin: 10px;
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+  }
+  
+  .form-control {
+    padding: 15px;
+    font-size: 16px; /* Prevents zoom on iOS */
+    border-radius: 8px;
+  }
+  
+  .form-row {
+    flex-direction: column;
+  }
+  
+  .form-row .form-group {
+    width: 100%;
+    margin-right: 0;
+  }
+  
+  .btn-group {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .btn-group .btn {
+    width: 100%;
+  }
+}
+
+/* Mobile Tables */
+@media (max-width: 768px) {
+  .table-responsive {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  table {
+    min-width: 600px;
+    font-size: 14px;
+  }
+  
+  th, td {
+    padding: 8px 12px;
+    white-space: nowrap;
+  }
+  
+  /* Card-style table for very small screens */
+  .table-card-mobile {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .table-responsive table {
+    display: none;
+  }
+  
+  .table-card-mobile {
+    display: block;
+  }
+  
+  .table-card-item {
+    background: var(--card-bg, #ffffff);
+    border: 1px solid var(--border-color, #dee2e6);
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 15px;
+  }
+  
+  .table-card-item .card-header {
+    font-weight: 600;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border-color, #dee2e6);
+  }
+  
+  .table-card-item .card-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+  }
+  
+  .table-card-item .card-label {
+    font-weight: 500;
+    color: var(--text-secondary, #666);
+  }
+}
+
+/* Mobile Modals */
+@media (max-width: 768px) {
+  .modal-dialog {
+    margin: 10px;
+    max-width: calc(100% - 20px);
+  }
+  
+  .modal-content {
+    border-radius: 12px;
+  }
+  
+  .modal-header {
+    padding: 20px 20px 15px;
+  }
+  
+  .modal-body {
+    padding: 15px 20px;
+  }
+  
+  .modal-footer {
+    padding: 15px 20px 20px;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .modal-footer .btn {
+    width: 100%;
+    margin: 0;
+  }
+}
+
+/* Mobile Property Cards */
+@media (max-width: 768px) {
+  .property-card {
+    margin-bottom: 20px;
+  }
+  
+  .property-image {
+    height: 200px;
+  }
+  
+  .property-content {
+    padding: 15px;
+  }
+  
+  .property-title {
+    font-size: 1.2rem;
+    margin-bottom: 8px;
+  }
+  
+  .property-specs {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  
+  .property-specs span {
+    font-size: 0.9rem;
+  }
+  
+  .property-price {
+    font-size: 1.3rem;
+  }
+}
+
+/* Mobile Dashboard */
+@media (max-width: 768px) {
+  .dashboard-container {
+    padding: 15px;
+  }
+  
+  .dashboard-header {
+    text-align: center;
+    margin-bottom: 25px;
+  }
+  
+  .dashboard-header h1 {
+    font-size: 1.8rem;
+  }
+  
+  .dashboard-stats {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+  }
+  
+  .stat-card {
+    padding: 20px 15px;
+    text-align: center;
+  }
+  
+  .stat-value {
+    font-size: 1.8rem;
+  }
+  
+  .dashboard-content {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}
+
+/* Mobile Search */
+@media (max-width: 768px) {
+  .search-container {
+    padding: 15px;
+    margin: 10px;
+    border-radius: 12px;
+  }
+  
+  .search-form {
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .search-input {
+    width: 100%;
+    padding: 15px;
+    font-size: 16px;
+    border-radius: 8px;
+  }
+  
+  .search-filters {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .filter-group {
+    width: 100%;
+  }
+  
+  .search-btn {
+    width: 100%;
+    padding: 15px;
+    font-size: 1.1rem;
+  }
+}
+
+/* Mobile Chat */
+@media (max-width: 768px) {
+  .chat-container {
+    height: calc(100vh - 60px);
+    margin: 0;
+    border-radius: 0;
+  }
+  
+  .chat-sidebar {
+    position: fixed;
+    left: -100%;
+    top: 60px;
+    width: 280px;
+    height: calc(100vh - 60px);
+    z-index: 1000;
+    transition: left 0.3s ease;
+  }
+  
+  .chat-sidebar.active {
+    left: 0;
+  }
+  
+  .chat-main {
+    width: 100%;
+  }
+  
+  .chat-header {
+    padding: 15px;
+    border-bottom: 1px solid var(--border-color, #dee2e6);
+  }
+  
+  .chat-messages {
+    height: calc(100vh - 180px);
+    padding: 15px;
+  }
+  
+  .chat-input-container {
+    padding: 15px;
+    border-top: 1px solid var(--border-color, #dee2e6);
+  }
+  
+  .message {
+    max-width: 85%;
+    margin-bottom: 10px;
+  }
+}
+
+/* Mobile Utilities */
+@media (max-width: 768px) {
+  .container {
+    padding: 0 15px;
+  }
+  
+  .section-header {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  
+  .section-header h2 {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+  }
+  
+  .section-header p {
+    font-size: 1rem;
+  }
+  
+  /* Hide desktop-only elements */
+  .desktop-only {
+    display: none !important;
+  }
+  
+  /* Show mobile-only elements */
+  .mobile-only {
+    display: block !important;
+  }
+}
+
+/* Touch-specific improvements */
+@media (hover: none) and (pointer: coarse) {
+  .btn:hover,
+  .nav-link:hover,
+  .property-card:hover {
+    transform: none;
+  }
+  
+  .btn:active,
+  .nav-link:active,
+  .property-card:active {
+    transform: scale(0.98);
+    transition: transform 0.1s ease;
+  }
+}
+
+/* Safe area support for notched devices */
+@supports (padding: max(0px)) {
+  .navbar {
+    padding-left: max(15px, env(safe-area-inset-left));
+    padding-right: max(15px, env(safe-area-inset-right));
+  }
+  
+  .container {
+    padding-left: max(15px, env(safe-area-inset-left));
+    padding-right: max(15px, env(safe-area-inset-right));
+  }
+  
+  .chat-container {
+    padding-bottom: max(0px, env(safe-area-inset-bottom));
+  }
+}
+
+/* PWA standalone mode adjustments */
+.pwa-standalone .navbar {
+  padding-top: max(10px, env(safe-area-inset-top));
+}
+
+.pwa-standalone .hero {
+  padding-top: max(60px, env(safe-area-inset-top));
+}
+
+/* Landscape orientation adjustments */
+@media (max-width: 768px) and (orientation: landscape) {
+  .hero {
+    height: 100vh;
+    padding: 40px 20px;
+  }
+  
+  .hero h1 {
+    font-size: 2rem;
+  }
+  
+  .hero p {
+    font-size: 1rem;
+  }
+  
+  .modal-dialog {
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+}
+
+/* Very small screens (< 360px) */
+@media (max-width: 359px) {
+  .container {
+    padding: 0 10px;
+  }
+  
+  .hero h1 {
+    font-size: 2rem;
+  }
+  
+  .btn {
+    padding: 12px 16px;
+    font-size: 0.9rem;
+  }
+  
+  .property-card,
+  .feature-card,
+  .service-card {
+    margin: 0 5px;
+  }
+  
+  .form-container {
+    padding: 15px 10px;
+    margin: 5px;
+  }
+}
+
+/* Print styles for mobile */
+@media print {
+  .nav-toggle,
+  .nav-overlay,
+  .mobile-only,
+  .pwa-install-button,
+  .theme-toggle {
+    display: none !important;
+  }
+  
+  .container {
+    padding: 0 !important;
+  }
+  
+  .property-card,
+  .feature-card {
+    break-inside: avoid;
+    margin-bottom: 20px;
+  }
+}

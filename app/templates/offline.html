@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="DreamBig Real Estate - Offline Page">
+    <meta name="theme-color" content="#667eea">
+    
+    <title>Offline - DreamBig Real Estate</title>
+    
+    <!-- External CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    
+    <!-- Internal CSS -->
+    <link href="/static/css/dark-mode.css" rel="stylesheet">
+    <link href="/static/css/accessibility.css" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .offline-container {
+            text-align: center;
+            max-width: 500px;
+            padding: 40px 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .offline-icon {
+            font-size: 5rem;
+            margin-bottom: 30px;
+            opacity: 0.8;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { opacity: 0.8; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.05); }
+            100% { opacity: 0.8; transform: scale(1); }
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+        
+        p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+        
+        .offline-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .btn {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            padding: 12px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            min-width: 200px;
+            justify-content: center;
+        }
+        
+        .btn:hover, .btn:focus {
+            background: rgba(255, 255, 255, 0.3);
+            border-color: rgba(255, 255, 255, 0.5);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .btn-primary {
+            background: rgba(255, 255, 255, 0.9);
+            color: #667eea;
+            border-color: rgba(255, 255, 255, 0.9);
+        }
+        
+        .btn-primary:hover, .btn-primary:focus {
+            background: white;
+            color: #667eea;
+        }
+        
+        .offline-features {
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .offline-features h3 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            opacity: 0.9;
+        }
+        
+        .feature-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .feature-list li {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+            opacity: 0.8;
+        }
+        
+        .feature-list i {
+            color: #4CAF50;
+            font-size: 1.1rem;
+        }
+        
+        .connection-status {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 10px 15px;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .status-indicator {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #f44336;
+            animation: blink 1s infinite;
+        }
+        
+        .status-indicator.online {
+            background: #4CAF50;
+            animation: none;
+        }
+        
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0.3; }
+        }
+        
+        @media (max-width: 768px) {
+            .offline-container {
+                margin: 20px;
+                padding: 30px 20px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            p {
+                font-size: 1.1rem;
+            }
+            
+            .offline-icon {
+                font-size: 4rem;
+            }
+            
+            .connection-status {
+                top: 10px;
+                right: 10px;
+                font-size: 0.8rem;
+                padding: 8px 12px;
+            }
+        }
+        
+        /* Dark mode support */
+        [data-theme="dark"] .offline-container {
+            background: rgba(0, 0, 0, 0.3);
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Reduced motion support */
+        @media (prefers-reduced-motion: reduce) {
+            .offline-icon, .status-indicator {
+                animation: none;
+            }
+        }
+        
+        /* High contrast support */
+        @media (prefers-contrast: high) {
+            .offline-container {
+                background: rgba(0, 0, 0, 0.8);
+                border: 2px solid white;
+            }
+            
+            .btn {
+                border-width: 3px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Connection Status -->
+    <div class="connection-status" id="connection-status">
+        <div class="status-indicator" id="status-indicator"></div>
+        <span id="status-text">Offline</span>
+    </div>
+
+    <!-- Main Offline Content -->
+    <main class="offline-container" role="main" aria-labelledby="offline-title">
+        <div class="offline-icon" aria-hidden="true">
+            <i class="fas fa-wifi"></i>
+        </div>
+        
+        <h1 id="offline-title">You're Offline</h1>
+        <p>It looks like you're not connected to the internet. Don't worry, you can still access some features of DreamBig Real Estate.</p>
+        
+        <div class="offline-actions">
+            <button class="btn btn-primary" onclick="window.location.reload()" aria-label="Try to reconnect to the internet">
+                <i class="fas fa-sync-alt"></i>
+                Try Again
+            </button>
+            
+            <a href="/" class="btn" aria-label="Go to homepage">
+                <i class="fas fa-home"></i>
+                Go to Homepage
+            </a>
+            
+            <button class="btn" onclick="goBack()" aria-label="Go back to previous page">
+                <i class="fas fa-arrow-left"></i>
+                Go Back
+            </button>
+        </div>
+        
+        <div class="offline-features">
+            <h3>Available Offline Features:</h3>
+            <ul class="feature-list">
+                <li>
+                    <i class="fas fa-check-circle"></i>
+                    <span>Browse cached property listings</span>
+                </li>
+                <li>
+                    <i class="fas fa-check-circle"></i>
+                    <span>View saved properties and favorites</span>
+                </li>
+                <li>
+                    <i class="fas fa-check-circle"></i>
+                    <span>Access your profile information</span>
+                </li>
+                <li>
+                    <i class="fas fa-check-circle"></i>
+                    <span>Use property calculator tools</span>
+                </li>
+            </ul>
+        </div>
+    </main>
+
+    <!-- Scripts -->
+    <script src="/static/js/theme-manager.js"></script>
+    <script src="/static/js/accessibility.js"></script>
+    
+    <script>
+        // Connection status monitoring
+        function updateConnectionStatus() {
+            const statusIndicator = document.getElementById('status-indicator');
+            const statusText = document.getElementById('status-text');
+            
+            if (navigator.onLine) {
+                statusIndicator.classList.add('online');
+                statusText.textContent = 'Online';
+                
+                // Auto-reload when connection is restored
+                setTimeout(() => {
+                    window.location.reload();
+                }, 2000);
+            } else {
+                statusIndicator.classList.remove('online');
+                statusText.textContent = 'Offline';
+            }
+        }
+        
+        // Go back function
+        function goBack() {
+            if (window.history.length > 1) {
+                window.history.back();
+            } else {
+                window.location.href = '/';
+            }
+        }
+        
+        // Listen for connection changes
+        window.addEventListener('online', updateConnectionStatus);
+        window.addEventListener('offline', updateConnectionStatus);
+        
+        // Initial status check
+        updateConnectionStatus();
+        
+        // Periodic connection check
+        setInterval(() => {
+            // Try to fetch a small resource to check connectivity
+            fetch('/static/manifest.json', { 
+                method: 'HEAD',
+                cache: 'no-cache'
+            })
+            .then(() => {
+                if (!navigator.onLine) {
+                    // Force online status if fetch succeeds
+                    window.dispatchEvent(new Event('online'));
+                }
+            })
+            .catch(() => {
+                if (navigator.onLine) {
+                    // Force offline status if fetch fails
+                    window.dispatchEvent(new Event('offline'));
+                }
+            });
+        }, 5000);
+        
+        // Keyboard shortcuts
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'r' && (e.ctrlKey || e.metaKey)) {
+                e.preventDefault();
+                window.location.reload();
+            }
+            
+            if (e.key === 'h' && (e.ctrlKey || e.metaKey)) {
+                e.preventDefault();
+                window.location.href = '/';
+            }
+        });
+        
+        // Announce page load to screen readers
+        if (window.accessibilityManager) {
+            window.accessibilityManager.announce('Offline page loaded. You can try to reconnect or access cached content.');
+        }
+    </script>
+</body>
+</html>

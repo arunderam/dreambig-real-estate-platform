@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Property - DreamBig Real Estate</title>
+    <link rel="stylesheet" href="{{ url_for('static', path='/css/auth.css') }}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .add-property-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .add-property-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 15px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .kyc-warning {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 30px;
+            display: none;
+        }
+
+        .kyc-warning.show {
+            display: block;
+        }
+
+        .property-form {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-section {
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title i {
+            color: #667eea;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .form-group-full {
+            grid-column: 1 / -1;
+        }
+
+        .image-upload-area {
+            border: 2px dashed #e1e5e9;
+            border-radius: 10px;
+            padding: 40px;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+
+        .image-upload-area:hover {
+            border-color: #667eea;
+            background: #f8f9ff;
+        }
+
+        .image-upload-area.dragover {
+            border-color: #667eea;
+            background: #f0f2ff;
+        }
+
+        .upload-icon {
+            font-size: 3rem;
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+
+        .upload-text {
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        .upload-hint {
+            font-size: 0.9rem;
+            color: #999;
+        }
+
+        .image-preview {
+            display: none;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .image-preview.show {
+            display: grid;
+        }
+
+        .preview-item {
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+            aspect-ratio: 1;
+        }
+
+        .preview-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .remove-image {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background: rgba(255, 71, 87, 0.9);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 25px;
+            height: 25px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .ai-analysis {
+            background: #e3f2fd;
+            border-left: 4px solid #2196f3;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+            display: none;
+        }
+
+        .ai-analysis.show {
+            display: block;
+        }
+
+        .analysis-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+            font-weight: 600;
+            color: #1976d2;
+        }
+
+        .analysis-results {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .analysis-item {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .analysis-score {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .analysis-score.good {
+            color: #4caf50;
+        }
+
+        .analysis-score.warning {
+            color: #ff9800;
+        }
+
+        .analysis-score.error {
+            color: #f44336;
+        }
+
+        .analysis-label {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        @media (max-width: 768px) {
+            .add-property-container {
+                padding: 15px;
+            }
+
+            .property-form {
+                padding: 25px;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Include Navbar -->
+    {% include 'components/navbar.html' %}
+
+    <div class="add-property-container">
+        <!-- Header -->
+        <div class="add-property-header">
+            <h1>Add Your Property</h1>
+            <p>List your property and reach thousands of potential buyers/tenants</p>
+        </div>
+
+        <!-- KYC Warning -->
+        <div class="kyc-warning" id="kycWarning">
+            <h4><i class="fas fa-exclamation-triangle"></i> KYC Verification Required</h4>
+            <p>You need to complete KYC verification before listing properties. This helps maintain trust and security on our platform.</p>
+            <a href="/kyc-verification" class="auth-button" style="display: inline-block; margin-top: 15px;">
+                Complete KYC Verification
+            </a>
+        </div>
+
+        <!-- Property Form -->
+        <div class="property-form">
+            <form id="propertyForm">
+                <!-- Basic Information -->
+                <div class="form-section">
+                    <div class="section-title">
+                        <i class="fas fa-info-circle"></i>
+                        Basic Information
+                    </div>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="title">Property Title</label>
+                            <input type="text" id="title" name="title" required>
+                            <span class="error-message" id="titleError"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="propertyType">Property Type</label>
+                            <select id="propertyType" name="property_type" required>
+                                <option value="">Select Type</option>
+                                <option value="apartment">Apartment</option>
+                                <option value="house">House</option>
+                                <option value="villa">Villa</option>
+                                <option value="commercial">Commercial</option>
+                            </select>
+                            <span class="error-message" id="propertyTypeError"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="bhk">BHK</label>
+                            <select id="bhk" name="bhk" required>
+                                <option value="">Select BHK</option>
+                                <option value="1">1 BHK</option>
+                                <option value="2">2 BHK</option>
+                                <option value="3">3 BHK</option>
+                                <option value="4">4 BHK</option>
+                                <option value="5">5+ BHK</option>
+                            </select>
+                            <span class="error-message" id="bhkError"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="area">Area (sq ft)</label>
+                            <input type="number" id="area" name="area" required>
+                            <span class="error-message" id="areaError"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="price">Price (₹)</label>
+                            <input type="number" id="price" name="price" required>
+                            <span class="error-message" id="priceError"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="furnishing">Furnishing</label>
+                            <select id="furnishing" name="furnishing" required>
+                                <option value="">Select Furnishing</option>
+                                <option value="furnished">Furnished</option>
+                                <option value="semi_furnished">Semi-Furnished</option>
+                                <option value="unfurnished">Unfurnished</option>
+                            </select>
+                            <span class="error-message" id="furnishingError"></span>
+                        </div>
+                        <div class="form-group-full">
+                            <label for="description">Description</label>
+                            <textarea id="description" name="description" rows="4" required></textarea>
+                            <span class="error-message" id="descriptionError"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Location Information -->
+                <div class="form-section">
+                    <div class="section-title">
+                        <i class="fas fa-map-marker-alt"></i>
+                        Location Details
+                    </div>
+                    <div class="form-grid">
+                        <div class="form-group-full">
+                            <label for="address">Complete Address</label>
+                            <textarea id="address" name="address" rows="3" required></textarea>
+                            <span class="error-message" id="addressError"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="city">City</label>
+                            <input type="text" id="city" name="city" required>
+                            <span class="error-message" id="cityError"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="state">State</label>
+                            <input type="text" id="state" name="state" required>
+                            <span class="error-message" id="stateError"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="pincode">PIN Code</label>
+                            <input type="text" id="pincode" name="pincode" pattern="[0-9]{6}" required>
+                            <span class="error-message" id="pincodeError"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Property Images -->
+                <div class="form-section">
+                    <div class="section-title">
+                        <i class="fas fa-camera"></i>
+                        Property Images
+                    </div>
+                    <div class="image-upload-area" onclick="document.getElementById('propertyImages').click()">
+                        <input type="file" id="propertyImages" name="images" multiple accept="image/*" style="display: none;">
+                        <div class="upload-icon">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                        </div>
+                        <div class="upload-text">Click to upload or drag and drop images</div>
+                        <div class="upload-hint">JPG, PNG (max 5MB each, up to 10 images)</div>
+                    </div>
+                    <div class="image-preview" id="imagePreview"></div>
+                    <span class="error-message" id="imagesError"></span>
+                </div>
+
+                <!-- AI Analysis Results -->
+                <div class="ai-analysis" id="aiAnalysis">
+                    <div class="analysis-header">
+                        <i class="fas fa-robot"></i>
+                        AI Property Analysis
+                    </div>
+                    <div class="analysis-results" id="analysisResults">
+                        <!-- Analysis results will be populated by JavaScript -->
+                    </div>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" class="auth-button" id="submitButton">
+                    <span class="button-text">List Property</span>
+                    <div class="loading-spinner" id="submitSpinner"></div>
+                </button>
+            </form>
+        </div>
+
+        <!-- Success/Error Messages -->
+        <div class="message-container" id="messageContainer"></div>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    
+    <!-- Custom JavaScript -->
+    <script src="{{ url_for('static', path='/js/firebase-config.js') }}"></script>
+    <script src="{{ url_for('static', path='/js/auth.js') }}"></script>
+    <script src="{{ url_for('static', path='/js/add-property.js') }}"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check authentication
+            if (!authManager.isAuthenticated()) {
+                window.location.href = '/login';
+                return;
+            }
+
+            initializeAddProperty();
+        });
+    </script>
+</body>
+</html>

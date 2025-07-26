@@ -1,0 +1,63 @@
+fastapi==0.68.1
+uvicorn==0.15.0
+python-jose==3.3.0
+passlib==1.7.4
+python-multipart==0.0.5
+jinja2==3.1.2
+sqlalchemy==1.4.23
+psycopg2-binary==2.9.1
+alembic==1.7.5
+pydantic==1.8.2
+pydantic-settings==2.0.3
+firebase-admin==5.2.0
+python-dotenv==0.19.0
+redis==3.5.3
+celery==5.3.4
+numpy==1.21.0
+scikit-learn==1.0.2
+requests==2.28.1
+
+# Enhanced validation and security
+email-validator==2.1.0
+phonenumbers==8.13.25
+bleach==6.1.0
+python-multipart==0.0.6
+
+# Backup and cloud storage
+boto3==1.34.0
+botocore==1.34.0
+
+# Rate limiting and caching
+slowapi==0.1.9
+python-jose[cryptography]==3.3.0
+
+# Enhanced logging and monitoring
+structlog==23.2.0
+sentry-sdk[fastapi]==1.40.0
+
+# WebSocket support for real-time features
+websockets==12.0
+
+# Additional utilities
+python-magic==0.4.27
+pillow==10.1.0
+qrcode==7.4.2
+geopy==2.3.0
+python-magic-bin==0.4.14  # For Windows compatibility
+itsdangerous==2.1.2
+
+# SMS and communication
+twilio==8.10.0
+
+# Testing dependencies
+pytest==7.4.3
+pytest-asyncio==0.21.1
+pytest-cov==4.1.0
+httpx==0.25.2
+factory-boy==3.3.0
+
+# Development tools
+black==23.11.0
+flake8==6.1.0
+mypy==1.7.1
+pre-commit==3.6.0

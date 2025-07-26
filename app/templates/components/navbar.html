@@ -1,0 +1,390 @@
+<!-- Navigation Bar Component -->
+<nav class="navbar" id="navbar">
+    <div class="nav-container">
+        <!-- Logo -->
+        <div class="nav-logo">
+            <a href="/">
+                <i class="fas fa-home"></i>
+                <span>DreamBig</span>
+            </a>
+        </div>
+
+        <!-- Navigation Links -->
+        <div class="nav-menu" id="navMenu">
+            <a href="/" class="nav-link">Home</a>
+            <a href="/properties" class="nav-link">Properties</a>
+            <a href="/investments" class="nav-link">Investments</a>
+            <a href="/services" class="nav-link">Services</a>
+            <a href="/about" class="nav-link">About</a>
+        </div>
+
+        <!-- User Menu -->
+        <div class="nav-user" id="navUser">
+            <!-- When user is not logged in -->
+            <div class="nav-auth" id="navAuth">
+                <a href="/login" class="nav-link login-link">Login</a>
+                <a href="/register" class="nav-button">Sign Up</a>
+            </div>
+
+            <!-- When user is logged in -->
+            <div class="nav-profile" id="navProfile" style="display: none;">
+                <div class="profile-dropdown">
+                    <button class="profile-button" id="profileButton">
+                        <div class="profile-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <span class="profile-name" id="profileName">User</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    
+                    <div class="dropdown-menu" id="dropdownMenu">
+                        <a href="/dashboard" class="dropdown-item">
+                            <i class="fas fa-tachometer-alt"></i>
+                            Dashboard
+                        </a>
+                        <a href="/profile" class="dropdown-item">
+                            <i class="fas fa-user-edit"></i>
+                            Profile
+                        </a>
+                        <a href="/my-properties" class="dropdown-item">
+                            <i class="fas fa-building"></i>
+                            My Properties
+                        </a>
+                        <a href="/my-investments" class="dropdown-item">
+                            <i class="fas fa-chart-line"></i>
+                            My Investments
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <button class="dropdown-item logout-button" id="logoutButton">
+                            <i class="fas fa-sign-out-alt"></i>
+                            Logout
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Toggle -->
+        <div class="nav-toggle" id="navToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+</nav>
+
+<!-- Navbar Styles -->
+<style>
+.navbar {
+    background: white;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    height: 70px;
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+}
+
+.nav-logo a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: #667eea;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.nav-logo i {
+    font-size: 1.8rem;
+}
+
+.nav-menu {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    transition: color 0.3s ease;
+    position: relative;
+}
+
+.nav-link:hover {
+    color: #667eea;
+}
+
+.nav-link.active::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: #667eea;
+}
+
+.nav-auth {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.nav-button {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.nav-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+}
+
+.profile-dropdown {
+    position: relative;
+}
+
+.profile-button {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px 12px;
+    border-radius: 25px;
+    transition: background 0.3s ease;
+}
+
+.profile-button:hover {
+    background: #f8f9fa;
+}
+
+.profile-avatar {
+    width: 35px;
+    height: 35px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
+.profile-name {
+    font-weight: 600;
+    color: #333;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    min-width: 200px;
+    padding: 10px 0;
+    display: none;
+    z-index: 1001;
+}
+
+.dropdown-menu.show {
+    display: block;
+    animation: dropdownSlide 0.3s ease-out;
+}
+
+@keyframes dropdownSlide {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 20px;
+    text-decoration: none;
+    color: #333;
+    transition: background 0.3s ease;
+    border: none;
+    background: none;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+}
+
+.dropdown-item:hover {
+    background: #f8f9fa;
+}
+
+.dropdown-divider {
+    height: 1px;
+    background: #e1e5e9;
+    margin: 10px 0;
+}
+
+.logout-button {
+    color: #ff4757;
+}
+
+.logout-button:hover {
+    background: #fff5f5;
+}
+
+.nav-toggle {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    gap: 4px;
+}
+
+.nav-toggle span {
+    width: 25px;
+    height: 3px;
+    background: #333;
+    transition: all 0.3s ease;
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+    .nav-menu {
+        position: fixed;
+        top: 70px;
+        left: -100%;
+        width: 100%;
+        height: calc(100vh - 70px);
+        background: white;
+        flex-direction: column;
+        justify-content: flex-start;
+        padding-top: 50px;
+        transition: left 0.3s ease;
+    }
+
+    .nav-menu.active {
+        left: 0;
+    }
+
+    .nav-toggle {
+        display: flex;
+    }
+
+    .nav-toggle.active span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    .nav-toggle.active span:nth-child(2) {
+        opacity: 0;
+    }
+
+    .nav-toggle.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(7px, -6px);
+    }
+}
+
+/* Add top margin to body to account for fixed navbar */
+body {
+    margin-top: 70px;
+}
+</style>
+
+<!-- Navbar JavaScript -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const navToggle = document.getElementById('navToggle');
+    const navMenu = document.getElementById('navMenu');
+    const profileButton = document.getElementById('profileButton');
+    const dropdownMenu = document.getElementById('dropdownMenu');
+    const logoutButton = document.getElementById('logoutButton');
+    const navAuth = document.getElementById('navAuth');
+    const navProfile = document.getElementById('navProfile');
+
+    // Mobile menu toggle
+    if (navToggle) {
+        navToggle.addEventListener('click', () => {
+            navToggle.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+    }
+
+    // Profile dropdown toggle
+    if (profileButton) {
+        profileButton.addEventListener('click', (e) => {
+            e.stopPropagation();
+            dropdownMenu.classList.toggle('show');
+        });
+    }
+
+    // Close dropdown when clicking outside
+    document.addEventListener('click', () => {
+        if (dropdownMenu) {
+            dropdownMenu.classList.remove('show');
+        }
+    });
+
+    // Logout functionality
+    if (logoutButton) {
+        logoutButton.addEventListener('click', async () => {
+            if (window.authManager) {
+                await window.authManager.logout();
+            }
+        });
+    }
+
+    // Update navbar based on auth state
+    function updateNavbar() {
+        const user = JSON.parse(localStorage.getItem('user') || 'null');
+        const token = localStorage.getItem('access_token');
+
+        if (user && token) {
+            // User is logged in
+            navAuth.style.display = 'none';
+            navProfile.style.display = 'block';
+            
+            const profileName = document.getElementById('profileName');
+            if (profileName) {
+                profileName.textContent = user.displayName || user.email || 'User';
+            }
+        } else {
+            // User is not logged in
+            navAuth.style.display = 'flex';
+            navProfile.style.display = 'none';
+        }
+    }
+
+    // Initial navbar update
+    updateNavbar();
+
+    // Listen for auth state changes
+    if (window.authManager) {
+        window.authManager.auth.onAuthStateChanged(() => {
+            setTimeout(updateNavbar, 100); // Small delay to ensure localStorage is updated
+        });
+    }
+});
+</script>
