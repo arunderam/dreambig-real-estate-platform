@@ -138,3 +138,20 @@ docker-compose.override.yml
 *.db-journal
 *.db-wal
 *.db-shm
+
+# SSH Keys and certificates (SECURITY: Never commit these!)
+*.pem
+*.key
+*.pub
+id_rsa*
+id_ed25519*
+firebase
+firebase.pub
+q
+q.pub
+
+# Temporary and test files
+temp_*
+test_*
+*.tmp
+*.temp
